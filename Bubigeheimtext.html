@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<!--HEADER START-->
+<head>
+
+<title>007 James Bubi :o</title>
+
+<!--CSS START-->
+<style>
+
+body {
+    background-color: black;
+    color: aqua;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column; /* <-- stacks inputs vertically */
+    gap: 15px;
+    align-items: center;              /* space between them */
+  }
+
+  .Header {
+   position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Courier New", monospace;
+  }
+
+  input {
+    width: 250px;
+    padding: 10px;
+  }
+
+.ascii {
+    position: fixed;
+    left: 150px;
+    top: 25%;
+    transform: translateY(-50%);
+    color: aqua;
+    font-size: 30px;
+}
+
+.ascii {
+    animation: heartbeat 1s infinite;
+    transform-origin: center;
+}
+
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.15); }
+    40%  { transform: scale(0.95); }
+    60%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.ascii2 {
+    position: fixed;
+    right: 150px;
+    top: 25%;
+    transform: translateY(-50%);
+    color: rgb(204, 27, 240);
+    font-size: 30px;
+}
+
+.ascii2 {
+    animation: heartbeat 1s infinite;
+    transform-origin: center;
+}
+
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.15); }
+    40%  { transform: scale(0.95); }
+    60%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+</style>
+<!--CSS END-->
+
+<div class="Header">
+<h1>BUBI magischer Geheimtext :3</h1>
+</div>
+
+</head>
+<!--HEADER END-->
+
+<!--BODY START-->
+<body>
+
+<div class="container">
+
+<h2>Original Text</h2>
+<textarea id="original" style="width: 485px; height: 72px;"></textarea>
+
+<h2>Geheimer Text</h2>
+<textarea id="encrypted" readonly style="width: 485px; height: 42px;"></textarea>
+
+<h2>Klartext</h2>
+<textarea id="decrypted" readonly style="width: 485px; height: 42px;"></textarea>
+
+<button type="button" id="runBtn" style="width: 122px; height: 122px;">Bestätigen</button>
+
+</div>
+
+ <div class="ascii">
+        <pre>
+  ***     ***
+ *****   *****
+******* *******
+ *************
+  ***********
+   *********
+    *******
+     *****
+      ***
+       *
+        </pre>
+    </div>
+
+    <div class="ascii2">
+        <pre>
+  ***     ***
+ *****   *****
+******* *******
+ *************
+  ***********
+   *********
+    *******
+     *****
+      ***
+       *
+        </pre>
+    </div>
+
+<!--This is where the Javascript starts-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const cipher =   "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+    function encrypt(text) {
+        let result = "";
+
+        for (let char of text.toUpperCase()) {
+            const index = alphabet.indexOf(char);
+
+            if (index !== -1) {
+                result += cipher[index];
+            } else {
+                result += char;
+            }
+        }
+
+        return result;
+    }
+
+    function decrypt(text) {
+        let result = "";
+
+        for (let char of text.toUpperCase()) {
+            const index = cipher.indexOf(char);
+
+            if (index !== -1) {
+                result += alphabet[index];
+            } else {
+                result += char;
+            }
+        }
+
+        return result;
+    }
+
+    const originalBox = document.getElementById("original");
+    const encryptedBox = document.getElementById("encrypted");
+    const decryptedBox = document.getElementById("decrypted");
+    const button = document.getElementById("runBtn");
+
+    if (!originalBox || !encryptedBox || !decryptedBox || !button) {
+        console.error("One or more elements not found!");
+        return;
+    }
+
+    button.addEventListener("click", () => {
+        const originalText = originalBox.value;
+
+        const encryptedText = encrypt(originalText);
+        encryptedBox.value = encryptedText;
+
+        const decryptedText = decrypt(originalText);
+        decryptedBox.value = decryptedText;
+    });
+
+});
+</script>
+<!--This is where the Javascript ends-->
+
+</body>
+<!--BODY END-->
+</html>
