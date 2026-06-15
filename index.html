@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Shopping Helfer</title>
+    <title>Einkaufi Helfer</title>
 <!--CSS START-->
 <style>
 
@@ -12,7 +12,7 @@ body {
     margin: 0;
     top: 2px;
     min-height: 100vh;
-    background-image: url("c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Dateien/Einkaufihelferbg.png");
+    background-image: url("images/Einkaufihelferbg.png");
     background-size: cover;
     background-position: absolute;
     background-repeat: no-repeat;
@@ -137,7 +137,7 @@ button {
 <!--BODY START-->
 <body>
 
-<img id="spinner" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\bitte.png" alt="spinner">
+<img id="spinner" src="images/bitte.png" alt="spinner">
 
 <div class="search-container">
     <input
@@ -155,9 +155,9 @@ button {
 
 <h3>Gesamtbetrag: <span id="total">0.00 €</span></h3>
 <div id="emojis">
-<img id="rewardImage" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\sideeye.JPG" style="display:none; width:80px;">
-<img id="rewardImage2" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\emojinobg.png" style="display:none; width:80px;">
-<img id="rewardImage3" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\emoji2.png" style="display:none; width:80px;">
+<img id="rewardImage" src="images/sideeye.JPG" style="display:none; width:80px;">
+<img id="rewardImage2" src="images/emojinobg.png" style="display:none; width:80px;">
+<img id="rewardImage3" src="images/emoji2" style="display:none; width:80px;">
 </div>
 
 </div>
@@ -170,122 +170,122 @@ let cart = [];
 const groceries = [
     {
         name: "Eistee - der Grüne",
-        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/eistee.JPG",
+        image: "images/eistee.JPG",
         price: 1.99
     },
     {
         name: "Milch",
-        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/milch.JPG",
+        image: "images/milch.JPG",
         price: 1.79
     },
     {
         name: "Banane",
-        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/Banane.JPG",
+        image: "images/banane.JPG",
         price: 0.30
     },
     {
         name: "Brechbohnen",
-        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/Bohnen.JPG",
+        image: "images/bohnen.JPG",
         price: 1.99
     },
     {
         name: "Back-Camembert",
-        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/camembert.JPG",
+        image: "images/camembert.JPG",
         price: 3.29
     },
     {
         name: "Eier 6x",
-        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/eier.JPG",
+        image: "images/eier.JPG",
         price: 4.19
     },
     {
         name: "Fleischwurst",
-        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/fleischwurst.JPG",
+        image: "images/fleischwurst.JPG",
         price: 3.99
     },
     {
         name: "Käse - Gouda",
-        image: "X",
+        image: "images/gouda.JPG",
         price: 2.39
     },
     {
         name: "Gurke",
-        image: "X",
+        image: "images/gurke.JPG",
         price: 0.79
     },
     {
         name: "Hänchenbrust",
-        image: "X",
+        image: "images/hanchen.JPG",
         price: 6.09
     },
     {
         name: "Kartoffeln",
-        image: "X",
+        image: "images/kartoffel.JPG",
         price: 4.19
     },
     {
         name: "Katzen snack",
-        image: "X",
+        image: "images/katzi.JPG",
         price: 5.19
     },
     {
         name: "Küchenrolle - tücher",
-        image: "X",
+        image: "images/tucher.JPG",
         price: 2.75
     },
     {
         name: "Toilettenpapier",
-        image: "X",
+        image: "images/toilette.JPG",
         price: 3.83
     },
     {
         name: "Mehl",
-        image: "X",
+        image: "images/mehl.JPG",
         price: 1.59
     },
     {
         name: "Rinderhack",
-        image: "X",
+        image: "images/hockfleisch.JPG",
         price: 7.49
     },
     {
         name: "Pizza Mozarella",
-        image: "X",
+        image: "images/pizzam.JPG",
         price: 3.99
     },
     {
         name: "Pizza Salami",
-        image: "X",
+        image: "images/pizzas.JPG",
         price: 3.99
     },
     {
         name: "Putenbrust",
-        image: "X",
+        image: "images/putenbrust.JPG",
         price: 1.99
     },
     {
         name: "Schlagsahne",
-        image: "X",
+        image: "images/schlagsahne.JPG",
         price: 0.89
     },
     {
         name: "Spargel",
-        image: "X",
+        image: "images/spargel.JPG",
         price: 4.79
     },
     {
         name: "Weiner Würstchen",
-        image: "X",
+        image: "images/weiner.JPG",
         price: 4.19
     },
     {
         name: "Zucker",
-        image: "X",
+        image: "images/zucker.JPG",
         price: 1.19
     },
     {
         name: "Zwiebeln",
-        image: "X",
+        image: "images/zwiebeln.JPG",
         price: 2.19
     },
 ];
