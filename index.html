@@ -1,218 +1,398 @@
 <!DOCTYPE html>
+
 <html>
 
-<!--HEADER START-->
 <head>
 
-<title>Substitutions Cipher</title>
-
+    <title>Shopping Helfer</title>
 <!--CSS START-->
 <style>
 
 body {
-    background-color: black;
-    color: aqua;
-}
-
-body {
     margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center; /* center horizontally */
-    align-items: center;     /* center vertically */
-  }
+    top: 2px;
+    min-height: 100vh;
+    background-image: url("c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Dateien/Einkaufihelferbg.png");
+    background-size: cover;
+    background-position: absolute;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #d2f7f8;
+}
 
-  .container {
+.search-container {
+    width: 300px;
+    position: relative;
+}
+
+#searchBox {
     position: absolute;
-    top: 100px;
-    display: flex;
-    flex-direction: column; /* <-- stacks inputs vertically */
-    gap: 15px;
-    align-items: center;              /* space between them */
-    
-  }
-
-  .Header {
-   position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: "Courier New", monospace;
-  }
-
-  input {
-    width: 250px;
+    left: 170%;
+    top: 250px;
+    width: 250%;
     padding: 10px;
-  }
-
-/* split layout */
-.container {
-  display: flex;
-  height: 100vh;
+    box-sizing: border-box;
 }
 
-/* LEFT: terminal */
-.terminal {
+#dropdown {
     position: absolute;
-    top: 110px;
-    right: 750px;
-  width: 40%;
-  background: #000;
-  padding: 20px;
-  border-right: 1px solid #00ff99;
-  box-shadow: 0 0 20px #00ff9955;
-  overflow: hidden;
-  white-space: pre-wrap;
+    left: 190%;
+    top: 295px;
+    width: 200%;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    display: none;
+    z-index: 9999;
 }
 
-/* RIGHT: optional content */
-.content {
-  flex: 1;
-  padding: 40px;
-  color: #ccc;
-}
-.cursor {
-  display: inline-block;
-  width: 10px;
-  background: #00ff99;
-  animation: blink 0.8s infinite;
+.result {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    gap: 10px;
+    padding: 8px;
+    cursor: pointer;
 }
 
-@keyframes blink {
-  50% { opacity: 0; }
+.result:hover {
+    background: #f5f5f5;
 }
 
+.result img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.product-name {
+    font-size: 22px;
+}
+
+.price {
+    color: green;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.Einkaufswagen {
+    position: absolute;
+    top: 55%;
+    right: 50%;
+    align-items: center;
+    font-size: large;
+     background: rgb(255, 255, 255);
+    border: none;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+button {
+    margin-left: 10px;
+    cursor: pointer;
+    background: rgb(29, 128, 185);
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+.emojis {
+
+    height: 40px;
+    width: 40px;
+
+}
+
+#spinner {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 150px;
+
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
 </style>
 <!--CSS END-->
-
-<div class="Header">
-<h1 class="glitch" data-text="NEON SYSTEM">Substitutions Cipher (⌐⊙_⊙)</h1>
-</div>
-
 </head>
-<!--HEADER END-->
 
 <!--BODY START-->
 <body>
 
-<div class="container">
+<img id="spinner" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\bitte.png" alt="spinner">
 
-<h2>Original Text</h2>
-<textarea id="original" style="width: 485px; height: 72px;"></textarea>
+<div class="search-container">
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Such Produkte..."
+    >
 
-<h2>Geheimer Text</h2>
-<textarea id="encrypted" readonly style="width: 485px; height: 42px;"></textarea>
-
-<h2>Klartext</h2>
-<textarea id="decrypted" readonly style="width: 485px; height: 42px;"></textarea>
-
-<button type="button" id="runBtn" style="width: 122px; height: 122px;">Bestätigen</button>
-
-<div class="container2">
-  <div class="terminal" id="terminal"></div>
-  <div class="content">
-  </div>
+    <div id="dropdown"></div>
 </div>
 
-<!--This is where the Javascript starts-->
+<div class="Einkaufswagen">
+<h3>Einkaufswagen</h3>
+<div id="cart"></div>
+
+<h3>Gesamtbetrag: <span id="total">0.00 €</span></h3>
+<div id="emojis">
+<img id="rewardImage" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\sideeye.JPG" style="display:none; width:80px;">
+<img id="rewardImage2" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\emojinobg.png" style="display:none; width:80px;">
+<img id="rewardImage3" src="c:\Users\Fennec Fox\Pictures\26\Codingfun\HTML and stuff\Shoppinghelper\Dateien\emoji2.png" style="display:none; width:80px;">
+</div>
+
+</div>
+
+<!--script start-->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
 
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const cipher =   "QWERTYUIOPASDFGHJKLZXCVBNM";
+let cart = [];
 
-    function encrypt(text) {
-        let result = "";
+const groceries = [
+    {
+        name: "Eistee - der Grüne",
+        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/eistee.JPG",
+        price: 1.99
+    },
+    {
+        name: "Milch",
+        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/milch.JPG",
+        price: 1.79
+    },
+    {
+        name: "Banane",
+        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/Banane.JPG",
+        price: 0.30
+    },
+    {
+        name: "Brechbohnen",
+        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/Bohnen.JPG",
+        price: 1.99
+    },
+    {
+        name: "Back-Camembert",
+        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/camembert.JPG",
+        price: 3.29
+    },
+    {
+        name: "Eier 6x",
+        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/eier.JPG",
+        price: 4.19
+    },
+    {
+        name: "Fleischwurst",
+        image: "c:/Users/Fennec Fox/Pictures/26/Codingfun/HTML and stuff/Shoppinghelper/Produkte/justpics/fleischwurst.JPG",
+        price: 3.99
+    },
+    {
+        name: "Käse - Gouda",
+        image: "X",
+        price: 2.39
+    },
+    {
+        name: "Gurke",
+        image: "X",
+        price: 0.79
+    },
+    {
+        name: "Hänchenbrust",
+        image: "X",
+        price: 6.09
+    },
+    {
+        name: "Kartoffeln",
+        image: "X",
+        price: 4.19
+    },
+    {
+        name: "Katzen snack",
+        image: "X",
+        price: 5.19
+    },
+    {
+        name: "Küchenrolle - tücher",
+        image: "X",
+        price: 2.75
+    },
+    {
+        name: "Toilettenpapier",
+        image: "X",
+        price: 3.83
+    },
+    {
+        name: "Mehl",
+        image: "X",
+        price: 1.59
+    },
+    {
+        name: "Rinderhack",
+        image: "X",
+        price: 7.49
+    },
+    {
+        name: "Pizza Mozarella",
+        image: "X",
+        price: 3.99
+    },
+    {
+        name: "Pizza Salami",
+        image: "X",
+        price: 3.99
+    },
+    {
+        name: "Putenbrust",
+        image: "X",
+        price: 1.99
+    },
+    {
+        name: "Schlagsahne",
+        image: "X",
+        price: 0.89
+    },
+    {
+        name: "Spargel",
+        image: "X",
+        price: 4.79
+    },
+    {
+        name: "Weiner Würstchen",
+        image: "X",
+        price: 4.19
+    },
+    {
+        name: "Zucker",
+        image: "X",
+        price: 1.19
+    },
+    {
+        name: "Zwiebeln",
+        image: "X",
+        price: 2.19
+    },
+];
 
-        for (let char of text.toUpperCase()) {
-            const index = alphabet.indexOf(char);
+const searchBox = document.getElementById("searchBox");
+const dropdown = document.getElementById("dropdown");
 
-            if (index !== -1) {
-                result += cipher[index];
-            } else {
-                result += char;
-            }
-        }
+searchBox.addEventListener("input", () => {
 
-        return result;
-    }
+    const text = searchBox.value.toLowerCase();
+    dropdown.innerHTML = "";
 
-    function decrypt(text) {
-        let result = "";
-
-        for (let char of text.toUpperCase()) {
-            const index = cipher.indexOf(char);
-
-            if (index !== -1) {
-                result += alphabet[index];
-            } else {
-                result += char;
-            }
-        }
-
-        return result;
-    }
-
-    const originalBox = document.getElementById("original");
-    const encryptedBox = document.getElementById("encrypted");
-    const decryptedBox = document.getElementById("decrypted");
-    const button = document.getElementById("runBtn");
-
-    if (!originalBox || !encryptedBox || !decryptedBox || !button) {
-        console.error("One or more elements not found!");
+    if (text === "") {
+        dropdown.style.display = "none";
         return;
     }
 
-    button.addEventListener("click", () => {
-        const originalText = originalBox.value;
+    const matches = groceries.filter(item =>
+        item.name.toLowerCase().includes(text)
+    );
 
-        const encryptedText = encrypt(originalText);
-        encryptedBox.value = encryptedText;
+    matches.forEach(item => {
 
-        const decryptedText = decrypt(originalText);
-        decryptedBox.value = decryptedText;
+        const result = document.createElement("div");
+        result.classList.add("result");
+
+        result.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="product-info">
+                <span class="product-name">${item.name}</span>
+                <span class="price">${item.price.toFixed(2)} €</span>
+            </div>
+        `;
+
+        result.addEventListener("click", () => {
+            searchBox.value = item.name;
+            dropdown.style.display = "none";
+
+            cart.push(item);
+            updateCart();
+
+            searchBox.value = "";
+        });
+
+        dropdown.appendChild(result);
     });
 
+    dropdown.style.display = matches.length ? "block" : "none";
 });
 
-//FOR THE CYBERPUNK STUFF
-const terminal = document.getElementById("terminal");
 
-const lines = [
-  "> boote verschluesselungs interface...",
-  "> lade Substitution Cipher v9.4",
-  "> sichere Verbindung wird hergestellt...",
-  "> GTA 6 wird released...",
-  "> Cipher ist bereit ✔",
-  "",
-  "Schreibe eine Nachricht."
-];
+function updateCart() {
+    const cartDiv = document.getElementById("cart");
+    const totalSpan = document.getElementById("total");
 
-let i = 0;
-let j = 0;
+    cartDiv.innerHTML = "";
 
-function typeLine() {
-  if (i < lines.length) {
-    if (j < lines[i].length) {
-      terminal.innerHTML += lines[i][j];
-      j++;
-      setTimeout(typeLine, 20);
-    } else {
-      terminal.innerHTML += "\n";
-      i++;
-      j = 0;
-      setTimeout(typeLine, 400);
-    }
-  } else {
-    terminal.innerHTML += "\n> _";
-  }
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        const div = document.createElement("div");
+
+        div.innerHTML = `
+            ${item.name} - ${item.price.toFixed(2)} €
+            <button onclick="removeItem(${index})">❌</button>
+        `;
+
+        cartDiv.appendChild(div);
+
+        total += item.price;
+    });
+
+    totalSpan.textContent = total.toFixed(2) + " €";
+
+    //EMOJI 1
+    const rewardImage = document.getElementById("rewardImage");
+
+if (total >= 25 && total <= 39.99) {
+    rewardImage.style.display = "inline-block";
+} else {
+    rewardImage.style.display = "none";
+}
+    //EMOJI2
+    const rewardImage2 = document.getElementById("rewardImage2");
+
+if (total >= 40 && total <= 69.99) {
+    rewardImage2.style.display = "inline-block";
+} else {
+    rewardImage2.style.display = "none";
+}
+    //EMOJI3
+    const rewardImage3 = document.getElementById("rewardImage3");
+
+if (total >= 70) {
+    rewardImage3.style.display = "inline-block";
+} else {
+    rewardImage3.style.display = "none";
+}
 }
 
-typeLine();
-//CYBERPUNKEND
+function removeItem(index) {
+    cart.splice(index, 1); // remove 1 item at position index
+    updateCart();          // refresh display + total
+}
 </script>
-<!--This is where the Javascript ends-->
-
+<!--script end-->
 </body>
 <!--BODY END-->
+
 </html>
